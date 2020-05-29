@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="720e419c-128a-4312-a6f1-f38cf35231f3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/configs/Api.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/configs/decorators/Controller.decorator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/configs/decorators/Get.decorator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/configs/definitions/Route.definition.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/configs/mysql.configs.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/configs/mysql_connect.configs.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/configs/mysql_pool.configs.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/Api.constant.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/Endpoint.constant.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/Prefix.constant.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/Router.constant.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/User.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/Respone.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1cTYAmzs0w1TQQuhd77hl1FpGdH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../NodeJsVsRestApiBase" />
+    <property name="ts.external.directory.path" value="D:\SourceCode\NodeJsMongoRestApi\node_modules\typescript\lib" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="720e419c-128a-4312-a6f1-f38cf35231f3" name="Default Changelist" comment="" />
+      <created>1590554588396</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590554588396</updated>
+      <workItem from="1590554589665" duration="132000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="740" y="315" key="FileChooserDialogImpl" timestamp="1590554675892">
+      <screen x="0" y="40" width="1920" height="1040" />
+    </state>
+    <state x="740" y="315" key="FileChooserDialogImpl/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1590554675892" />
+  </component>
+</project>

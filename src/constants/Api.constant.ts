@@ -1,0 +1,4 @@
+const DEFAULT_STATUS_CODE = 200;
+const DEFAULT_MSG = 'Success!';
+
+export default {DEFAULT_STATUS_CODE,DEFAULT_MSG};

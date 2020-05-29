@@ -1,0 +1,43 @@
+{
+  "name": "nodejsmongorestapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "dev": "nodemon --exec ts-node ./src/server.ts",
+    "start": "nodemon ./dist/server.js",
+    "prod": "npm run build && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/longleduy/NodeJsMongoRestApi.git"
+  },
+  "author": "LongLD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/longleduy/NodeJsMongoRestApi/issues"
+  },
+  "homepage": "https://github.com/longleduy/NodeJsMongoRestApi#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "mongoose": "^5.9.16",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.6",
+    "@types/helmet": "0.0.47",
+    "@types/mongoose": "^5.7.21",
+    "@types/node": "^14.0.5",
+    "delay": "^4.3.0",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.3"
+  }
+}

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  tvtokyo:
+    container_name: playfake
+    build: .
+    environment:
+      - PORT=8081
+      - MONGODB_PATH=mongodb+srv://app_owner_01:app_owner_01@cluster0-bgjen.mongodb.net/mydb
+    working_dir: /usr/src/app/playfake
+    command: /bin/bash startup.sh
+    volumes:
+    - .:/usr/src/app/playfake
+    ports:
+    - "4001:8081"
