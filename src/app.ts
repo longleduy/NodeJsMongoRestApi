@@ -2,8 +2,7 @@ import express,{Request,Response} from 'express';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
-import CatController from "./controllers/User.controller";
-import PostController from "./controllers/Post.controller";
+import TopVideoController from "./controllers/videos/TopVideo.controller";
 import {IRouteDefinition} from "./configs/definitions/Route.definition";
 import JsonRespone from './models/Respone.model';
 import {Mongo} from './configs/mongo.config';
@@ -25,7 +24,7 @@ class App {
         this.app.use(cors());
     }
     private initRoutes(): void{
-        const listController:any = [PostController];
+        const listController:any = [TopVideoController];
         listController.forEach((controller:any) => {
             const instance = new controller();
             const prefix = Reflect.getMetadata('prefix', controller);

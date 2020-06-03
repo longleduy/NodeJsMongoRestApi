@@ -2,7 +2,6 @@ import 'reflect-metadata';
 import app from './app';
 import dotenv from 'dotenv';
 dotenv.config();
-
 if (!process.env.PORT) {
     console.log(`Error to get ports`);
     process.exit(1);
