@@ -32,10 +32,13 @@ export default class TopVideoController {
                     mode = 4;
             }
             let sort: number = req.query.sort === 'asc' ? 1 : -1;
-            let data: object = await episodeModel.find({episode_play_type:mode}).sort({_id: sort}).limit(parseInt(req.query.limit));
-            return new JsonRespone(apiConstant.DEFAULT_STATUS_CODE,apiConstant.DEFAULT_MSG,data)
+            const getDataFunc: any = episodeModel.find({episode_play_type:mode}).sort({_id: sort}).limit(parseInt(req.query.limit));
+            const countDataFunc: any = episodeModel.count({episode_play_type:mode});
+            let data: object = await getDataFunc;
+            let count: number = await  countDataFunc;
+            return new JsonRespone(apiConstant.DEFAULT_STATUS_CODE,1,null,count,parseInt(req.query.limit),data)
         }catch (e) {
-            return new JsonRespone(500,apiConstant.DEFAULT_MSG,e.toString());
+            return new JsonRespone(500,8,e.toString(),null,null,{});
         }
     }
 }
