@@ -5,7 +5,7 @@ services:
     build: .
     environment:
       - PORT=8081
-      - MONGODB_PATH=mongodb+srv://app_owner_01:app_owner_01@cluster0-bgjen.mongodb.net/mydb
+      - MONGODB_PATH=mongodb://app_owner:app_owner@mongodb/tvtokyo
     working_dir: /usr/src/app/playfake
     command: /bin/bash startup.sh
     volumes:
