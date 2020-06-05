@@ -3,16 +3,14 @@ import {apiConstant} from '../constants/index';
 export default class JsonRespone{
     public status_code: number = apiConstant.DEFAULT_STATUS_CODE;
     public data:object;
-    public respone_code: number;
-    public respone_msg: string | null;
-    public total_fetch_count: number | null;
-    public request_fetch_count: number | null;
-    constructor(status_code: number,respone_code: number, respone_msg: string | null,total_fetch_count: number | null,request_fetch_count:number | null,data:object) {
+    public total_count: number | null;
+    public page: number | null;
+    public limit: number | null;
+    constructor(status_code: number,total_count: number | null,page:number | null,limit: number | null,data:object) {
         this.status_code = status_code;
-        this.respone_msg = respone_msg;
-        this.respone_code = respone_code | 1;
-        this.total_fetch_count = total_fetch_count;
-        this.request_fetch_count = request_fetch_count;
+        this.total_count = total_count;
+        this.page = page;
+        this.limit = limit;
         this.data = data;
     }
     public getStatusCode(): number{
@@ -20,10 +18,11 @@ export default class JsonRespone{
     }
     public getData(): object{
         return {
-            respone_code: this.respone_code,
-            respone_msg: this.respone_msg,
-            total_fetch_count: this.total_fetch_count,
-            request_fetch_count: this.request_fetch_count,
+            paging:{
+                total_count: this.total_count,
+                page: this.page,
+                limit: this.limit
+            },
             data: this.data
         };
     }

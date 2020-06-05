@@ -9,6 +9,7 @@ interface IEpisodeDetailRequest extends Request {
         mode: string,
         sort: string,
         limit: string;
+        program_id: Array<any>;
     };
 }
 @Controller(prefixConstant.EPISODE)
@@ -32,13 +33,27 @@ export default class TopVideoController {
                     mode = 4;
             }
             let sort: number = req.query.sort === 'asc' ? 1 : -1;
-            const getDataFunc: any = episodeModel.find({episode_play_type:mode}).sort({_id: sort}).limit(parseInt(req.query.limit));
-            const countDataFunc: any = episodeModel.count({episode_play_type:mode});
+            let programId : any = null;
+            if(req.query.program_id !== undefined){
+                programId = req.query.program_id.map(function(item) {
+                    return parseInt(item);
+                });
+            };
+            let getDataFunc: any;
+            let countDataFunc: any;
+            if(programId !== null){
+                getDataFunc = episodeModel.find({episode_play_type:mode,program_id:{$in:programId}}).sort({_id: sort}).limit(parseInt(req.query.limit));
+                countDataFunc = episodeModel.count({episode_play_type:mode,program_id:{$in:programId}});
+            }
+            else{
+                getDataFunc = episodeModel.find({episode_play_type:mode}).sort({_id: sort}).limit(parseInt(req.query.limit));
+                countDataFunc = episodeModel.count({episode_play_type:mode});
+            }
             let data: object = await getDataFunc;
             let count: number = await  countDataFunc;
-            return new JsonRespone(apiConstant.DEFAULT_STATUS_CODE,1,null,count,parseInt(req.query.limit),data)
+            return new JsonRespone(apiConstant.DEFAULT_STATUS_CODE,count,0,parseInt(req.query.limit),data)
         }catch (e) {
-            return new JsonRespone(500,8,e.toString(),null,null,{});
+            return new JsonRespone(500,null,null,null,{})
         }
     }
 }
