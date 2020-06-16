@@ -1,2 +1,3 @@
 const EPISODE = '/episode';
-export default {EPISODE};
+const INDEX = '';
+export default {EPISODE,INDEX};

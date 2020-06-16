@@ -3,6 +3,7 @@ import * as bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import TopVideoController from "./controllers/videos/TopVideo.controller";
+import CommonController from "./controllers/Common.controller";
 import {IRouteDefinition} from "./configs/definitions/Route.definition";
 import JsonRespone from './models/Respone.model';
 import {Mongo} from './configs/mongo.config';
@@ -24,13 +25,14 @@ class App {
         this.app.use(cors());
     }
     private initRoutes(): void{
-        const listController:any = [TopVideoController];
+        const listController:any = [TopVideoController,CommonController];
         listController.forEach((controller:any) => {
             const instance = new controller();
             const prefix = Reflect.getMetadata('prefix', controller);
             const routes: IRouteDefinition[] = Reflect.getMetadata('routes', controller);
             routes.forEach((route) => {
                this.app[route.requestMethod](prefix + route.path, async (req: Request, res: Response) => {
+                   console.log(req.originalUrl);
                   const data:JsonRespone = await instance[route.methodName](req, res);
                   res.status(data.getStatusCode());
                   res.json(data.getData());

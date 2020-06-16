@@ -51,9 +51,9 @@ export default class TopVideoController {
             }
             let data: object = await getDataFunc;
             let count: number = await  countDataFunc;
-            return new JsonRespone(apiConstant.DEFAULT_STATUS_CODE,count,0,parseInt(req.query.limit),data)
+            return new JsonRespone('',apiConstant.DEFAULT_STATUS_CODE,count,0,parseInt(req.query.limit),data)
         }catch (e) {
-            return new JsonRespone(500,null,null,null,{})
+            return new JsonRespone('',500,null,null,null,{})
         }
     }
 }
