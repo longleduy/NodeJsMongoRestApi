@@ -45,7 +45,7 @@ export default class TopVideoController {
                     filterOption[key] = objc[key];
             });
             console.log(filterOption);
-                getDataFunc = episodeModel.find(filterOption).sort({_id: sort}).limit(parseInt(req.query.limit));
+                getDataFunc = episodeModel.find(filterOption).sort({broadcast_date: sort,broadcast_time:sort}).limit(parseInt(req.query.limit));
                 countDataFunc = episodeModel.count(filterOption);
             let data: object = await getDataFunc;
             let count: number = await  countDataFunc;

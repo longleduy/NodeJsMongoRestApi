@@ -17,7 +17,7 @@ export default class CommonController {
     try {
       const limit: number = parseInt(req.query.limit);
       const position: string = req.query.position;
-      const getSpecialFunc = specialModel.find({position:position}).sort({_id: -1}).limit(limit);
+      const getSpecialFunc = specialModel.find({position:position}).sort({broadcast_date: -1,broadcast_time:-1}).limit(limit);
       const countSpecialFunc = specialModel.count({});
       const data: object = await getSpecialFunc;
       const count: number = await countSpecialFunc;
