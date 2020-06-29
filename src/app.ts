@@ -4,6 +4,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import TopVideoController from "./controllers/videos/TopVideo.controller";
 import CommonController from "./controllers/Common.controller";
+import EpisodeController from './controllers/Episode.controller';
 import {IRouteDefinition} from "./configs/definitions/Route.definition";
 import JsonRespone from './models/Respone.model';
 import {Mongo} from './configs/mongo.config';
@@ -25,7 +26,7 @@ class App {
         this.app.use(cors());
     }
     private initRoutes(): void{
-        const listController:any = [TopVideoController,CommonController];
+        const listController:any = [TopVideoController,CommonController,EpisodeController];
         listController.forEach((controller:any) => {
             const instance = new controller();
             const prefix = Reflect.getMetadata('prefix', controller);
