@@ -11,6 +11,7 @@ interface IEpisodeDetailRequest extends Request {
         limit: string;
         program_id: Array<any>;
         corner_id: Array<any>;
+        episode_id: string;
     };
 }
 @Controller(prefixConstant.EPISODE)
@@ -21,6 +22,7 @@ export default class TopVideoController {
         try {
             let sort: number = req.query.sort === 'asc' ? 1 : -1;
             let programId : any = null;
+            let limit = parseInt(req.query.limit);
             if(req.query.program_id !== undefined){
                 programId = req.query.program_id.map(function(item) {
                     return parseInt(item);
@@ -35,7 +37,17 @@ export default class TopVideoController {
             let getDataFunc: any;
             let countDataFunc: any;
             let objc: any = {
-                episode_play_type: 3,
+                episode_play_type: (() => {
+                    let type: any = null;
+                    switch (req.query.mode) {
+                        case 'new':
+                            type =  3;
+                            break;
+                        default:
+                            type = null;
+                    }
+                    return type;
+                })(),
                 program_id: programId !== null ? {$in:programId}: null,
                 corner_id: cornerId != null ?  {$in:cornerId}: null,
             };
@@ -44,14 +56,27 @@ export default class TopVideoController {
                 if (objc[key] !== null)
                     filterOption[key] = objc[key];
             });
-            console.log(filterOption);
-                getDataFunc = episodeModel.find(filterOption).sort({broadcast_date: sort,broadcast_time:sort}).limit(parseInt(req.query.limit));
-                countDataFunc = episodeModel.count(filterOption);
+            if(req.query.mode === 'lup'){
+                limit = 999;
+               await this.setFilterOptionInfo(filterOption,req.query.episode_id);
+            }
+            getDataFunc = episodeModel.find(filterOption).sort({broadcast_date: sort,broadcast_time:sort}).limit(limit);
+            countDataFunc = episodeModel.count(filterOption);
             let data: object = await getDataFunc;
             let count: number = await  countDataFunc;
-            return new JsonRespone('',apiConstant.DEFAULT_STATUS_CODE,count,0,parseInt(req.query.limit),data)
+            return new JsonRespone('',apiConstant.DEFAULT_STATUS_CODE,count,0,limit,data)
         }catch (e) {
+            console.log(e);
             return new JsonRespone('',500,null,null,null,{})
         }
+    }
+    private async setFilterOptionInfo(filterOption: any, episodeId: string): Promise<void>{
+            let data: any = await  episodeModel.findOne({episode_id: parseInt(episodeId)});
+            if(data){
+                let {program_id,broadcast_date} = data._doc as {program_id: number,broadcast_date: string};
+                filterOption.program_id = program_id;
+                filterOption.broadcast_date = broadcast_date;
+                filterOption.episode_id = {$ne:parseInt(episodeId)};
+            }
     }
 }
