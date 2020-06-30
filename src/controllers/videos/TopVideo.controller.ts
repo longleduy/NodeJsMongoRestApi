@@ -60,6 +60,9 @@ export default class TopVideoController {
                 limit = 999;
                await this.setFilterOptionInfo(filterOption,req.query.episode_id);
             }
+            if(req.query.mode === 'back'){
+                await this.setFilterOptionInfoBackMode(filterOption,req.query.episode_id);
+            }
             getDataFunc = episodeModel.find(filterOption).sort({broadcast_date: sort,broadcast_time:sort}).limit(limit);
             countDataFunc = episodeModel.count(filterOption);
             let data: object = await getDataFunc;
@@ -78,5 +81,14 @@ export default class TopVideoController {
                 filterOption.broadcast_date = broadcast_date;
                 filterOption.episode_id = {$ne:parseInt(episodeId)};
             }
+    }
+    private async setFilterOptionInfoBackMode(filterOption: any, episodeId: string): Promise<void>{
+        let data: any = await  episodeModel.findOne({episode_id: parseInt(episodeId)});
+        if(data){
+            let {program_id} = data._doc as {program_id: number,broadcast_date: string};
+            filterOption.program_id = program_id;
+            filterOption.episode_id = {$ne:parseInt(episodeId)};
+            filterOption.corner_id = {$in:[64,640,1596,1597,1864,53,188,265,641,1289,1598,1599,1515,859,1757,1439,75,234,812,160,212,639,1600,1601]};
+        }
     }
 }
