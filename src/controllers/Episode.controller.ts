@@ -13,7 +13,7 @@ interface IEpisodeDetailRequest extends Request {
 @Controller(prefixConstant.EPISODE)
 export default class EpisodeController {
   @Get(apiPath.GET_EPISODE_DETAIL)
-  public async getListSpecialInfo(req: IEpisodeDetailRequest, res: Response){
+  public async getEpisodeDetail(req: IEpisodeDetailRequest, res: Response){
     try {
       let episodeInfoFunc =  episodeModel.find({episode_id:parseInt(req.params.id)},{_id: 0 }).exec();
       let episodeDetailFunc =  episodeDetailModel.find({episode_id:parseInt(req.params.id)},{_id: 0, episode_id: 0}).exec();
@@ -22,6 +22,9 @@ export default class EpisodeController {
       let episodeInfoRes = episodeInfo ? episodeInfo._doc : {};
       let episodeDetailRes = episodeDetail ? episodeDetail._doc : {};
       let data = {...episodeInfoRes,...episodeDetailRes};
+      if(Object.keys(data).length === 0){
+        data = null;
+      }
       return new JsonRespone('',apiConstant.DEFAULT_STATUS_CODE,0,0,0,data)
     }
     catch (e) {
