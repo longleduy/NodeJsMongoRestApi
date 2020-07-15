@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import TopVideoController from "./controllers/videos/TopVideo.controller";
 import CommonController from "./controllers/Common.controller";
 import EpisodeController from './controllers/Episode.controller';
+import EpisodeMultiController from './controllers/EpisodeMulti.controller';
 import MovieController from './controllers/Movie.controller';
 import SerializeController from './controllers/Serialize.controller';
 import {IRouteDefinition} from "./configs/definitions/Route.definition";
@@ -28,7 +29,7 @@ class App {
         this.app.use(cors());
     }
     private initRoutes(): void{
-        const listController:any = [TopVideoController,CommonController,EpisodeController,MovieController,SerializeController];
+        const listController:any = [TopVideoController,CommonController,EpisodeController,MovieController,SerializeController,EpisodeMultiController];
         listController.forEach((controller:any) => {
             const instance = new controller();
             const prefix = Reflect.getMetadata('prefix', controller);

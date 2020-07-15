@@ -31,5 +31,5 @@ export default class EpisodeController {
       console.log(e);
       return new JsonRespone('',500,null,null,null,{})
     }
-  }
+  };
 }

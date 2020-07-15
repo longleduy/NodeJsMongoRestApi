@@ -72,7 +72,7 @@ export default class TopVideoController {
             console.log(e);
             return new JsonRespone('',500,null,null,null,{})
         }
-    }
+    };
     private async setFilterOptionInfo(filterOption: any, episodeId: string): Promise<void>{
             let data: any = await  episodeModel.findOne({episode_id: parseInt(episodeId)});
             if(data){
