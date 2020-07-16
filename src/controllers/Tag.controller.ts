@@ -13,6 +13,7 @@ interface ITagInfoRequest extends Request {
 interface ITagDetailRequest extends Request {
   query: {
     tag_title: string;
+    corner_id: string;
     limit: string;
     page: string;
   };
@@ -37,12 +38,21 @@ export default class TagController {
   public async getTagDetail(req: ITagDetailRequest){
     try {
       const limit: number = parseInt(req.query.limit);
-      let episodeListFunc =  episodeModel.find({episode_tag:req.query.tag_title}).sort({broadcast_date: -1,broadcast_time:-1}).limit(limit);
-      let countFunc =  episodeModel.count({episode_tag:req.query.tag_title});
+      let skip = req.query.page || req.query.page !== "0" ? (Number(req.query.page) - 1)* limit : 0;
+      let objc: any = {
+        corner_id: req.query.corner_id != null ?  {$in:req.query.corner_id.split(",").map(Number)}: null,
+        episode_tag: req.query.tag_title
+      };
+      let filterOption: any = {};
+      Object.keys(objc).forEach(function(key) {
+        if (objc[key] !== null)
+          filterOption[key] = objc[key];
+      });
+      let episodeListFunc =  episodeModel.find(filterOption).sort({broadcast_date: -1,broadcast_time:-1}).limit(limit).skip(skip);
+      let countFunc =  episodeModel.count(filterOption);
       const data = await episodeListFunc;
       const count = await countFunc;
-      console.log(count);
-      return new JsonRespone('PY',apiConstant.DEFAULT_STATUS_CODE,count,0,limit,data)
+      return new JsonRespone('PY',apiConstant.DEFAULT_STATUS_CODE,count,Number(req.query.page),limit,data)
     }
     catch (e) {
       return new JsonRespone('PY',500,null,null,null,{})
