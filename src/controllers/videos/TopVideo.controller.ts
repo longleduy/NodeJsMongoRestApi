@@ -9,6 +9,7 @@ interface IEpisodeDetailRequest extends Request {
         mode: string,
         sort: string,
         limit: string;
+        page: string;
         program_id: Array<any>;
         corner_id: Array<any>;
         episode_id: string;
@@ -23,6 +24,7 @@ export default class TopVideoController {
             let sort: number = req.query.sort === 'asc' ? 1 : -1;
             let programId : any = null;
             let limit = parseInt(req.query.limit);
+            let skip = req.query.page || req.query.page !== "0" ? (Number(req.query.page) - 1)* limit : 0;
             if(req.query.program_id !== undefined){
                 programId = req.query.program_id.map(function(item) {
                     return parseInt(item);
@@ -63,11 +65,11 @@ export default class TopVideoController {
             if(req.query.mode === 'back'){
                 await this.setFilterOptionInfoBackMode(filterOption,req.query.episode_id);
             }
-            getDataFunc = episodeModel.find(filterOption).sort({broadcast_date: sort,broadcast_time:sort}).limit(limit);
+            getDataFunc = episodeModel.find(filterOption).sort({broadcast_date: sort,broadcast_time:sort}).limit(limit).skip(skip);
             countDataFunc = episodeModel.count(filterOption);
             let data: object = await getDataFunc;
             let count: number = await  countDataFunc;
-            return new JsonRespone('',apiConstant.DEFAULT_STATUS_CODE,count,0,limit,data)
+            return new JsonRespone('',apiConstant.DEFAULT_STATUS_CODE,count,Number(req.query.page),limit,data)
         }catch (e) {
             console.log(e);
             return new JsonRespone('',500,null,null,null,{})
