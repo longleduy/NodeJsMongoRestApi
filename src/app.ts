@@ -13,6 +13,7 @@ import {IRouteDefinition} from "./configs/definitions/Route.definition";
 import JsonRespone from './models/Respone.model';
 import {Mongo} from './configs/mongo.config';
 import dotenv from 'dotenv';
+import EventController from "./controllers/Event.controller";
 dotenv.config();
 class App {
     public app: express.Application;
@@ -30,7 +31,7 @@ class App {
         this.app.use(cors());
     }
     private initRoutes(): void{
-        const listController:any = [TopVideoController,CommonController,EpisodeController,MovieController,SerializeController,EpisodeMultiController,TagController];
+        const listController:any = [TopVideoController,CommonController,EpisodeController,MovieController,SerializeController,EpisodeMultiController,TagController,EventController];
         listController.forEach((controller:any) => {
             const instance = new controller();
             const prefix = Reflect.getMetadata('prefix', controller);

@@ -78,11 +78,12 @@ export default class TopVideoController {
     private async setFilterOptionInfo(filterOption: any, episodeId: string): Promise<void>{
             let data: any = await  episodeModel.findOne({episode_id: parseInt(episodeId)});
             if(data){
+                console.log("program_id",data.program_id)
                 let {program_id,broadcast_date} = data._doc as {program_id: number,broadcast_date: string};
                 filterOption.program_id = program_id;
                 filterOption.broadcast_date = broadcast_date;
                 filterOption.episode_id = {$ne:parseInt(episodeId)};
-            }
+            };
     }
     private async setFilterOptionInfoBackMode(filterOption: any, episodeId: string): Promise<void>{
         let data: any = await  episodeModel.findOne({episode_id: parseInt(episodeId)});
